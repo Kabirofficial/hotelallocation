@@ -15,6 +15,8 @@ export function BookingModal({ room, onClose, onSubmit }) {
 
   const defaultDates = getDefaultDates();
   const [guestName, setGuestName] = useState('');
+  const [memberCount, setMemberCount] = useState(1);
+  const [memberNames, setMemberNames] = useState('');
   const [checkIn, setCheckIn] = useState(defaultDates.checkIn);
   const [checkOut, setCheckOut] = useState(defaultDates.checkOut);
 
@@ -25,6 +27,8 @@ export function BookingModal({ room, onClose, onSubmit }) {
     onSubmit({
       roomId: room.id,
       guestName,
+      memberCount: parseInt(memberCount, 10) || 1,
+      memberNames,
       checkIn,
       checkOut,
     });
@@ -46,7 +50,7 @@ export function BookingModal({ room, onClose, onSubmit }) {
 
         <form onSubmit={handleSubmit} className="modal-form">
           <div className="form-group">
-            <label htmlFor="guestName">Guest Name</label>
+            <label htmlFor="guestName">Primary Guest Name</label>
             <input
               type="text"
               id="guestName"
@@ -57,6 +61,41 @@ export function BookingModal({ room, onClose, onSubmit }) {
               autoFocus
             />
           </div>
+
+          <div className="form-row">
+            <div className="form-group" style={{ flex: 1 }}>
+              <label htmlFor="memberCount">Number of Guests</label>
+              <input
+                type="number"
+                id="memberCount"
+                min="1"
+                value={memberCount}
+                onChange={(e) => setMemberCount(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {memberCount > 1 && (
+            <div className="form-group animate-fade-in">
+              <label htmlFor="memberNames">Additional Member Names (Optional)</label>
+              <textarea
+                id="memberNames"
+                placeholder="e.g. Jane Doe, Jimmy Doe"
+                value={memberNames}
+                onChange={(e) => setMemberNames(e.target.value)}
+                style={{ 
+                  background: 'rgba(0, 0, 0, 0.2)', 
+                  border: '1px solid rgba(255, 255, 255, 0.1)', 
+                  color: 'white', 
+                  padding: '0.75rem', 
+                  borderRadius: '0.5rem',
+                  fontFamily: 'inherit',
+                  minHeight: '60px',
+                  resize: 'vertical'
+                }}
+              />
+            </div>
+          )}
 
           <div className="form-row">
             <div className="form-group">

@@ -13,6 +13,8 @@ export function ExportButton({ data, hotelName }) {
     const formattedData = data.map(booking => ({
       'Room Number': booking.roomId,
       'Guest Name': booking.guestName,
+      'Total Guests': booking.memberCount || 1,
+      'Additional Names': booking.memberNames || '',
       'Check-In': booking.checkIn,
       'Check-Out': booking.checkOut,
     }));
@@ -25,6 +27,8 @@ export function ExportButton({ data, hotelName }) {
     const wscols = [
       { wch: 12 }, // Room Number
       { wch: 25 }, // Guest Name
+      { wch: 15 }, // Total Guests
+      { wch: 40 }, // Additional Names
       { wch: 15 }, // Check-In
       { wch: 15 }  // Check-Out
     ];

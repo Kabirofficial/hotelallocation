@@ -1,4 +1,5 @@
 import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import { Sidebar } from './components/Sidebar';
 import { Dashboard } from './components/Dashboard';
 import { useRooms } from './hooks/useRooms';
@@ -14,13 +15,38 @@ function App() {
     stats,
     addBooking,
     removeBooking,
-    allBookings
+    allBookings,
+    isLoading
   } = useRooms();
 
   if (!activeHotel) return null;
 
   return (
     <>
+      <Toaster 
+        position="top-right" 
+        toastOptions={{
+          style: {
+            background: 'var(--bg-card)',
+            color: 'var(--text-primary)',
+            backdropFilter: 'blur(12px)',
+            border: '1px solid var(--glass-border)',
+            boxShadow: 'var(--shadow-glass)',
+          },
+          success: {
+            iconTheme: {
+              primary: 'var(--status-vacant)',
+              secondary: 'white',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: 'var(--status-occupied)',
+              secondary: 'white',
+            },
+          },
+        }}
+      />
       <Sidebar 
         hotels={hotels} 
         activeHotelId={activeHotelId} 
@@ -33,6 +59,7 @@ function App() {
         onAddBooking={addBooking}
         onRemoveBooking={removeBooking}
         allBookings={allBookings}
+        isLoading={isLoading}
       />
     </>
   );

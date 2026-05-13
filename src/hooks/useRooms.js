@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
+import toast from 'react-hot-toast';
 import { supabase } from '../lib/supabase';
 import { HOTELS, MOCK_ROOMS } from '../data/constants';
 
@@ -18,12 +19,13 @@ export function useRooms() {
       if (error) {
         console.error("Error fetching bookings:", error);
       } else {
-        // Map snake_case from DB to camelCase for our frontend
         const formattedData = data.map(b => ({
           id: b.id,
           roomId: b.room_id,
           hotelId: b.hotel_id,
           guestName: b.guest_name,
+          memberCount: b.member_count,
+          memberNames: b.member_names,
           checkIn: b.check_in,
           checkOut: b.check_out,
           createdAt: b.created_at
@@ -66,6 +68,8 @@ export function useRooms() {
       hotel_id: activeHotelId,
       room_id: bookingData.roomId,
       guest_name: bookingData.guestName,
+      member_count: bookingData.memberCount,
+      member_names: bookingData.memberNames,
       check_in: bookingData.checkIn,
       check_out: bookingData.checkOut
     };
@@ -77,6 +81,8 @@ export function useRooms() {
       roomId: bookingData.roomId,
       hotelId: activeHotelId,
       guestName: bookingData.guestName,
+      memberCount: bookingData.memberCount,
+      memberNames: bookingData.memberNames,
       checkIn: bookingData.checkIn,
       checkOut: bookingData.checkOut,
       createdAt: new Date().toISOString()
@@ -94,12 +100,13 @@ export function useRooms() {
       console.error("Error adding booking:", error);
       // Revert optimistic update on failure
       setBookings(prev => prev.filter(b => b.id !== tempId));
-      alert("Failed to save booking. Please try again.");
+      toast.error("Failed to save booking. Please try again.");
     } else if (data && data[0]) {
       // Replace optimistic temp ID with real DB ID
       setBookings(prev => prev.map(b => 
         b.id === tempId ? { ...b, id: data[0].id } : b
       ));
+      toast.success(`Checked in ${bookingData.guestName} to Room ${bookingData.roomId}`);
     }
   };
 
@@ -116,7 +123,9 @@ export function useRooms() {
     if (error) {
       console.error("Error removing booking:", error);
       setBookings(previousBookings); // Revert
-      alert("Failed to delete booking from database. Please check your connection or RLS settings.");
+      toast.error("Failed to delete booking from database.");
+    } else {
+      toast.success("Booking successfully removed");
     }
   };
 

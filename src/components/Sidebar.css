@@ -20,11 +20,11 @@
   width: 40px;
   height: 40px;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+  background: linear-gradient(135deg, var(--accent-primary), #f59e0b);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: #000;
 }
 
 .sidebar-title {
@@ -82,7 +82,7 @@
 }
 
 .nav-item.active {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(234, 179, 8, 0.1);
   color: var(--accent-primary);
 }
 

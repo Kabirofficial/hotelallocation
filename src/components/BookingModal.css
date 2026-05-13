@@ -102,7 +102,7 @@ input {
 input:focus {
   background: rgba(0, 0, 0, 0.3);
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 0 2px rgba(234, 179, 8, 0.2);
 }
 
 /* Customizing date picker icon color for webkit */
@@ -124,13 +124,14 @@ input:focus {
 }
 
 .submit-btn {
-  background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
-  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, var(--accent-primary), #f59e0b);
+  box-shadow: 0 4px 15px rgba(234, 179, 8, 0.3);
+  color: #000;
 }
 
 .submit-btn:hover {
-  background: linear-gradient(135deg, var(--accent-hover), #7c3aed);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  background: linear-gradient(135deg, var(--accent-hover), #d97706);
+  box-shadow: 0 6px 20px rgba(234, 179, 8, 0.4);
 }
 
 @media (max-width: 768px) {
