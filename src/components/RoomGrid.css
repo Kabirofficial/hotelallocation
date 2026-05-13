@@ -1,0 +1,117 @@
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.room-cell {
+  aspect-ratio: 1;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-family: inherit;
+  
+  /* Initial state for staggered fade in */
+  opacity: 0;
+  animation: scaleIn 0.3s ease-out forwards;
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.room-cell:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.room-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  z-index: 2;
+}
+
+.room-status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.guest-name {
+  font-size: 0.65rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 90%;
+  text-align: center;
+  padding: 2px 4px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+/* Vacant Styles */
+.room-cell.vacant {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+  border-color: rgba(16, 185, 129, 0.3);
+  color: var(--status-vacant);
+}
+
+.room-cell.vacant:hover {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.1));
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+}
+
+.room-cell.vacant .room-status-indicator {
+  background-color: var(--status-vacant);
+  box-shadow: 0 0 8px var(--status-vacant);
+}
+
+/* Occupied Styles */
+.room-cell.occupied {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+  border-color: rgba(239, 68, 68, 0.3);
+  color: var(--status-occupied);
+  cursor: default; /* Optional: Make it unclickable if you can't edit from grid */
+}
+
+.room-cell.occupied:hover {
+  transform: translateY(-2px); /* Less movement on hover for occupied */
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+}
+
+.room-cell.occupied .room-status-indicator {
+  background-color: var(--status-occupied);
+  box-shadow: 0 0 8px var(--status-occupied);
+}
+
+/* Subtle background pattern */
+.room-cell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 10px 10px;
+  opacity: 0.2;
+  z-index: 1;
+}
