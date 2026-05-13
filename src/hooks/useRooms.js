@@ -116,6 +116,7 @@ export function useRooms() {
     if (error) {
       console.error("Error removing booking:", error);
       setBookings(previousBookings); // Revert
+      alert("Failed to delete booking from database. Please check your connection or RLS settings.");
     }
   };
 

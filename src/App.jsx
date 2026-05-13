@@ -13,6 +13,7 @@ function App() {
     roomStatuses,
     stats,
     addBooking,
+    removeBooking,
     allBookings
   } = useRooms();
 
@@ -30,6 +31,7 @@ function App() {
         stats={stats}
         roomStatuses={roomStatuses}
         onAddBooking={addBooking}
+        onRemoveBooking={removeBooking}
         allBookings={allBookings}
       />
     </>

@@ -120,3 +120,60 @@
 .footer-btn:hover {
   color: var(--text-primary);
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--glass-border);
+    flex-direction: column;
+    z-index: 100;
+  }
+
+  .sidebar-header {
+    padding: 1rem;
+    justify-content: center;
+  }
+
+  .sidebar-content {
+    padding: 0;
+  }
+
+  .sidebar-label {
+    display: none;
+  }
+
+  .nav-menu {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0 1rem 1rem;
+    gap: 1rem;
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .nav-menu::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-item {
+    white-space: nowrap;
+    width: auto;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+  }
+
+  .active-indicator {
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sidebar-footer {
+    display: none; /* Hide footer on mobile to save space */
+  }
+}

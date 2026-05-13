@@ -2,18 +2,14 @@ import React, { useState } from 'react';
 import { StatsCard } from './StatsCard';
 import { RoomGrid } from './RoomGrid';
 import { BookingModal } from './BookingModal';
+import { GuestDetailsModal } from './GuestDetailsModal';
 import { ExportButton } from './ExportButton';
 import './Dashboard.css';
 
-export function Dashboard({ activeHotel, stats, roomStatuses, onAddBooking, allBookings }) {
+export function Dashboard({ activeHotel, stats, roomStatuses, onAddBooking, onRemoveBooking, allBookings }) {
   const [selectedRoom, setSelectedRoom] = useState(null);
 
   const handleRoomClick = (room) => {
-    if (room.isOccupied) {
-      // Could show guest details modal here instead of checking in
-      alert(`Room ${room.number} is occupied by ${room.booking.guestName}`);
-      return;
-    }
     setSelectedRoom(room);
   };
 
@@ -45,11 +41,19 @@ export function Dashboard({ activeHotel, stats, roomStatuses, onAddBooking, allB
         <RoomGrid rooms={roomStatuses} onRoomClick={handleRoomClick} />
       </section>
 
-      {selectedRoom && (
+      {selectedRoom && !selectedRoom.isOccupied && (
         <BookingModal
           room={selectedRoom}
           onClose={() => setSelectedRoom(null)}
           onSubmit={onAddBooking}
+        />
+      )}
+
+      {selectedRoom && selectedRoom.isOccupied && (
+        <GuestDetailsModal
+          room={selectedRoom}
+          onClose={() => setSelectedRoom(null)}
+          onDelete={onRemoveBooking}
         />
       )}
     </main>

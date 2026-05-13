@@ -132,3 +132,13 @@ input:focus {
   background: linear-gradient(135deg, var(--accent-hover), #7c3aed);
   box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
 }
+
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 90%;
+    margin: 1rem;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}

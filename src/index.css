@@ -47,6 +47,12 @@ body {
   min-height: 100vh;
 }
 
+@media (max-width: 768px) {
+  #root {
+    flex-direction: column;
+  }
+}
+
 /* Glassmorphism utilities */
 .glass {
   background: var(--bg-card);
